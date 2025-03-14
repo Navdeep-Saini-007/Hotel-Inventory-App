@@ -1,5 +1,6 @@
 <!-- Interpolation Binding -->
-<p>Welcome to {{ hotelName }}</p>
+<!-- <p>Welcome to {{ hotelName }}</p> -->
+<hinv-header></hinv-header>
 <!-- Property Binding -->
 <div
   [hidden]="isRoomHidden"
@@ -9,38 +10,15 @@
   <p [innerText]="noOfRooms"></p>
 </div>
 <!-- Only for development purpose -->
-{{ roomList | json }}
+ <div *ngIf="selectedRoom">
+  {{ selectedRoom | json }}
+ </div>
+ <div>
+  <button (click)="addRoom()">Add Room</button>
+ </div>
 <!-- Directive *ngIf, *ngFor -->
-<div *ngIf="rooms.availableRooms > 0">
-  <p>Rooms are available. Rooms List:</p>
-  <table>
-    <tr>
-      <th>Index</th>
-      <th>Even/Odd</th>
-      <th>Room Type</th>
-      <th>Room Amenities</th>
-      <th>Room Price</th>
-      <th>Room CheckinTime</th>
-      <th>Room Rating</th>
-    </tr>
-    <tr
-      [ngClass]="e ? 'even' : 'odd'"
-      *ngFor="
-        let room of roomList | slice : 0 : 2;
-        let e = even;
-        let o = odd;
-        let i = index
-      "
-    >
-      <td>{{ i | percent }}</td>
-      <td>{{ e ? ("Even" | lowercase) : ("Odd" | lowercase) }}</td>
-      <td>{{ room.roomType | uppercase }}</td>
-      <td>{{ room.amenities | titlecase }}</td>
-      <td>{{ room.price | currency : "INR" }}</td>
-      <td>{{ room.checkinTime | date : "DD-MMM-YYYY" }}</td>
-      <td>{{ room.rating | number : "1.2-3" }}</td>
-    </tr>
-  </table>
+<div *ngIf="isRoomHidden">
+  <hinv-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)" [title] = "'Rooms are available: '"></hinv-rooms-list>
 </div>
 <!-- Event Binding -->
 <button (click)="toggle()">Click</button>

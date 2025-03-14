@@ -1,4 +1,5 @@
-<h1>Hello</h1>
+<!-- Element Ref example using view child -->
+<div #element></div>
 <!-- child component -->
 <!-- <hinv-rooms></hinv-rooms> -->
 
@@ -7,7 +8,13 @@
     <p>Welcome Users!</p>
   </div>
   <div *ngSwitchCase="'Admin'">
-    <p><hinv-rooms></hinv-rooms></p>
+    <!-- <p><hinv-rooms></hinv-rooms></p> -->
+    <hinv-container>
+      <hinv-rooms></hinv-rooms>
+      <h1>Content inside hinv-container content projection</h1>
+      <hinv-employee></hinv-employee>
+    </hinv-container>
+     <!-- <ng-template #admin></ng-template> -->
   </div>
   <div *ngSwitchDefault>
     <p>You are not Unauthorised:(</p>
